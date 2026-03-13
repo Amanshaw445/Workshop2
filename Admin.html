@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SteelCraft Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <span>⚙</span>
+      <span class="logo-text">STEEL<em>CRAFT</em> ADMIN</span>
+    </div>
+    <h2>Sign In</h2>
+    <p class="login-sub">Enter credentials to access the admin panel</p>
+    <div class="login-form">
+      <div class="field-group">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="admin" />
+      </div>
+      <div class="field-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" />
+      </div>
+      <div class="login-error hidden" id="loginError">Invalid credentials. Try: admin / steelcraft2025</div>
+      <button class="btn-primary" onclick="doLogin()">Sign In →</button>
+      <p class="login-hint">Default: admin / steelcraft2025</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp" class="admin-app hidden">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <span>⚙</span>
+      <span class="logo-text">STEEL<em>CRAFT</em></span>
+    </div>
+    <nav class="sb-nav">
+      <button class="sb-link active" data-panel="dashboard">📊 Dashboard</button>
+      <button class="sb-link" data-panel="machines">⚙️ Machines</button>
+      <button class="sb-link" data-panel="gallery">🖼️ Gallery</button>
+      <button class="sb-link" data-panel="reviews">⭐ Reviews</button>
+      <button class="sb-link" data-panel="settings">⚙ Settings</button>
+    </nav>
+    <div class="sb-bottom">
+      <a href="../index.html" target="_blank" class="sb-link">🌐 View Website</a>
+      <button class="sb-link" onclick="logout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main">
+    <header class="admin-header">
+      <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+      <div class="ah-title" id="panelTitle">Dashboard</div>
+      <div class="ah-right">
+        <span class="ah-user">👤 Admin</span>
+        <button class="btn-save" id="globalSave" onclick="saveAll()">💾 Save Changes</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="dash-stats">
+        <div class="dash-card">
+          <div class="dc-icon">⚙️</div>
+          <div class="dc-num" id="statMachines">0</div>
+          <div class="dc-label">Machines Listed</div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-icon">🖼️</div>
+          <div class="dc-num" id="statPhotos">0</div>
+          <div class="dc-label">Gallery Photos</div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-icon">⭐</div>
+          <div class="dc-num" id="statReviews">0</div>
+          <div class="dc-label">Customer Reviews</div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-icon">🎥</div>
+          <div class="dc-num" id="statVideos">0</div>
+          <div class="dc-label">Videos</div>
+        </div>
+      </div>
+      <div class="dash-actions">
+        <h3>Quick Actions</h3>
+        <div class="qa-grid">
+          <button class="qa-btn" onclick="switchPanel('machines')">➕ Add Machine</button>
+          <button class="qa-btn" onclick="switchPanel('gallery')">📷 Upload Photo</button>
+          <button class="qa-btn" onclick="switchPanel('reviews')">💬 Add Review</button>
+          <button class="qa-btn" onclick="exportData()">📤 Export Data</button>
+        </div>
+      </div>
+      <div class="dash-recent">
+        <h3>Recently Added Machines</h3>
+        <div class="recent-list" id="recentMachines"></div>
+      </div>
+    </div>
+
+    <!-- MACHINES PANEL -->
+    <div class="panel" id="panel-machines">
+      <div class="panel-toolbar">
+        <h2>Manage Machines</h2>
+        <button class="btn-primary" onclick="showAddMachineForm()">➕ Add New Machine</button>
+      </div>
+
+      <!-- Machine Form -->
+      <div class="form-card hidden" id="machineFormCard">
+        <h3 id="mFormTitle">Add New Machine</h3>
+        <input type="hidden" id="mFormId" />
+        <div class="form-grid">
+          <div class="field-group">
+            <label>Machine Name *</label>
+            <input type="text" id="mName" placeholder="CNC Turning Center TC-500" />
+          </div>
+          <div class="field-group">
+            <label>Category *</label>
+            <select id="mCategory">
+              <option value="cnc">CNC</option>
+              <option value="lathe">Lathe</option>
+              <option value="welding">Welding</option>
+              <option value="press">Press</option>
+              <option value="drilling">Drilling</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Category Label</label>
+            <input type="text" id="mCategoryLabel" placeholder="CNC Machine" />
+          </div>
+          <div class="field-group">
+            <label>Price *</label>
+            <input type="text" id="mPrice" placeholder="₹18,50,000" />
+          </div>
+          <div class="field-group">
+            <label>Badge (optional)</label>
+            <input type="text" id="mBadge" placeholder="BESTSELLER / HOT / PREMIUM" />
+          </div>
+          <div class="field-group">
+            <label>Stock Status</label>
+            <select id="mStock">
+              <option value="in">In Stock</option>
+              <option value="out">Out of Stock</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group full">
+          <label>Description *</label>
+          <textarea id="mDesc" rows="3" placeholder="Detailed description of the machine..."></textarea>
+        </div>
+        <div class="field-group full">
+          <label>Main Image URL *</label>
+          <input type="url" id="mImage" placeholder="https://images.unsplash.com/..." />
+        </div>
+        <div class="field-group full">
+          <label>Gallery Images (one URL per line)</label>
+          <textarea id="mGallery" rows="4" placeholder="https://...&#10;https://...&#10;https://..."></textarea>
+        </div>
+        <div class="field-group full">
+          <label>Technical Specifications (Key: Value, one per line)</label>
+          <textarea id="mSpecs" rows="6" placeholder="Max Swing Diameter: 500 mm&#10;Spindle Speed: 3500 RPM&#10;Weight: 4200 kg"></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveMachine()">💾 Save Machine</button>
+          <button class="btn-ghost" onclick="cancelMachineForm()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Machines List -->
+      <div class="machines-table" id="machinesTable"></div>
+    </div>
+
+    <!-- GALLERY PANEL -->
+    <div class="panel" id="panel-gallery">
+      <div class="panel-toolbar">
+        <h2>Manage Gallery</h2>
+      </div>
+      <div class="gallery-admin-tabs">
+        <button class="ga-tab active" data-gtab="photos">📷 Photos</button>
+        <button class="ga-tab" data-gtab="videos">🎥 Videos</button>
+      </div>
+
+      <!-- Photos -->
+      <div id="ga-photos">
+        <div class="add-photo-form form-card">
+          <h3>Add Photo</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label>Image URL *</label>
+              <input type="url" id="gPhotoUrl" placeholder="https://images.unsplash.com/..." />
+            </div>
+            <div class="field-group">
+              <label>Caption</label>
+              <input type="text" id="gPhotoCaption" placeholder="Workshop floor, Machine view..." />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="addPhoto()">➕ Add Photo</button>
+        </div>
+        <div class="gallery-admin-grid" id="galleryAdminGrid"></div>
+      </div>
+
+      <!-- Videos -->
+      <div id="ga-videos" class="hidden">
+        <div class="add-photo-form form-card">
+          <h3>Add YouTube Video</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label>YouTube Video ID *</label>
+              <input type="text" id="gVideoId" placeholder="dQw4w9WgXcQ (from youtube.com/watch?v=...)" />
+            </div>
+            <div class="field-group">
+              <label>Caption</label>
+              <input type="text" id="gVideoCaption" placeholder="Machine demo, Customer review..." />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="addVideo()">➕ Add Video</button>
+        </div>
+        <div class="gallery-admin-grid" id="videoAdminGrid"></div>
+      </div>
+    </div>
+
+    <!-- REVIEWS PANEL -->
+    <div class="panel" id="panel-reviews">
+      <div class="panel-toolbar">
+        <h2>Manage Reviews</h2>
+        <button class="btn-primary" onclick="showAddReviewForm()">➕ Add Review</button>
+      </div>
+      <div class="form-card hidden" id="reviewFormCard">
+        <h3 id="rFormTitle">Add Review</h3>
+        <input type="hidden" id="rFormIdx" value="-1" />
+        <div class="form-grid">
+          <div class="field-group">
+            <label>Customer Name *</label>
+            <input type="text" id="rName" placeholder="Rajesh Mehta" />
+          </div>
+          <div class="field-group">
+            <label>Company & Location</label>
+            <input type="text" id="rCompany" placeholder="Mehta Auto Parts, Pune" />
+          </div>
+          <div class="field-group">
+            <label>Rating (1–5) *</label>
+            <select id="rRating">
+              <option value="5">★★★★★ (5)</option>
+              <option value="4">★★★★☆ (4)</option>
+              <option value="3">★★★☆☆ (3)</option>
+              <option value="2">★★☆☆☆ (2)</option>
+              <option value="1">★☆☆☆☆ (1)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Product Purchased</label>
+            <input type="text" id="rProduct" placeholder="CNC Turning Center TC-500" />
+          </div>
+        </div>
+        <div class="field-group full">
+          <label>Review Text *</label>
+          <textarea id="rText" rows="4" placeholder="Customer's review..."></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveReview()">💾 Save Review</button>
+          <button class="btn-ghost" onclick="cancelReviewForm()">Cancel</button>
+        </div>
+      </div>
+      <div class="reviews-admin-list" id="reviewsAdminList"></div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="panel" id="panel-settings">
+      <h2>Site Settings</h2>
+      <div class="form-card">
+        <h3>Contact Information</h3>
+        <div class="form-grid">
+          <div class="field-group">
+            <label>Phone / WhatsApp Number</label>
+            <input type="text" id="setPhone" placeholder="+91 98765 43210" />
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" id="setEmail" placeholder="info@steelcraftworkshop.com" />
+          </div>
+          <div class="field-group full">
+            <label>Address</label>
+            <input type="text" id="setAddress" placeholder="12 Industrial Estate, Kasba, Kolkata – 700042" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+        </div>
+      </div>
+      <div class="form-card" style="margin-top:24px">
+        <h3>Data Management</h3>
+        <div class="qa-grid">
+          <button class="qa-btn" onclick="exportData()">📤 Export JSON</button>
+          <button class="qa-btn danger" onclick="resetData()">🗑️ Reset to Default</button>
+        </div>
+        <p style="color:var(--text3);font-size:.8rem;margin-top:16px">All data is stored in your browser's localStorage. Export regularly to keep a backup.</p>
+      </div>
+      <div class="form-card" style="margin-top:24px">
+        <h3>Change Password</h3>
+        <div class="form-grid">
+          <div class="field-group">
+            <label>New Username</label>
+            <input type="text" id="newUser" placeholder="admin" />
+          </div>
+          <div class="field-group">
+            <label>New Password</label>
+            <input type="password" id="newPass" placeholder="••••••••" />
+          </div>
+        </div>
+        <button class="btn-primary" onclick="changePassword()">🔒 Update Credentials</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="adminToast"></div>
+
+<script src="../js/data.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SteelCraft Workshop — Industrial Equipment & Machinery</title>
+  <meta name="description" content="Premium industrial equipment, workshop machinery, and tools. Trusted by professionals worldwide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<header id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon">⚙</span>
+      <span class="logo-text">STEEL<em>CRAFT</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#machines">Machinery</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#machines">Machinery</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏭 EST. 2008 — KOLKATA, INDIA</div>
+    <h1 class="hero-title">
+      INDUSTRIAL<br/>
+      <span class="accent-line">POWER</span><br/>
+      DELIVERED.
+    </h1>
+    <p class="hero-sub">Premium workshop equipment & heavy machinery for professionals who demand nothing less than excellence.</p>
+    <div class="hero-actions">
+      <a href="#machines" class="btn-primary">Browse Machinery</a>
+      <a href="#contact" class="btn-ghost">📞 Call Now</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-target="500">0</span><span class="stat-label">Machines Sold</span></div>
+      <div class="stat"><span class="stat-num" data-target="15">0</span><span class="stat-label">Years Active</span></div>
+      <div class="stat"><span class="stat-num" data-target="98">0</span><span class="stat-label">% Satisfaction</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="machine-showcase">
+      <div class="showcase-ring ring1"></div>
+      <div class="showcase-ring ring2"></div>
+      <div class="showcase-icon">⚙️</div>
+      <div class="floating-tag tag1">CNC Precision</div>
+      <div class="floating-tag tag2">ISO Certified</div>
+      <div class="floating-tag tag3">Warranty Included</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ TRUST BAR ═══════════════════════════ -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <span>🔩 Free Installation</span>
+    <span>🛡️ 2-Year Warranty</span>
+    <span>🚚 Pan-India Delivery</span>
+    <span>🔧 AMC Available</span>
+    <span>💳 Easy EMI</span>
+    <span>⭐ ISO 9001:2015</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MACHINES ═══════════════════════════ -->
+<section class="section" id="machines">
+  <div class="section-header">
+    <div class="section-tag">OUR INVENTORY</div>
+    <h2>Workshop <span class="accent">Machinery</span></h2>
+    <p>Every machine is tested, certified, and ready for industrial use</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="cnc">CNC</button>
+    <button class="filter-btn" data-filter="lathe">Lathe</button>
+    <button class="filter-btn" data-filter="welding">Welding</button>
+    <button class="filter-btn" data-filter="press">Press</button>
+    <button class="filter-btn" data-filter="drilling">Drilling</button>
+  </div>
+
+  <div class="machines-grid" id="machinesGrid">
+    <!-- Populated by JS from data -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MACHINE MODAL ═══════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-inner" id="modalInner"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ GALLERY ═══════════════════════════ -->
+<section class="section section-dark" id="gallery">
+  <div class="section-header">
+    <div class="section-tag">VISUAL PROOF</div>
+    <h2>Workshop <span class="accent">Gallery</span></h2>
+    <p>Real machines, real workshops, real results</p>
+  </div>
+  <div class="gallery-tabs">
+    <button class="gtab active" data-gtab="photos">📷 Photos</button>
+    <button class="gtab" data-gtab="videos">🎥 Videos</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+  <div class="gallery-video-grid hidden" id="galleryVideoGrid"></div>
+  <button class="load-more" id="loadMoreGallery">Load More Photos</button>
+</section>
+
+<!-- ═══════════════════════════ LIGHTBOX ═══════════════════════════ -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <button class="lb-next" id="lbNext">›</button>
+  <div class="lb-content" id="lbContent"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- ═══════════════════════════ WHY US ═══════════════════════════ -->
+<section class="section" id="whyus">
+  <div class="section-header">
+    <div class="section-tag">WHY STEELCRAFT</div>
+    <h2>Built on <span class="accent">Trust</span></h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔬</div>
+      <h3>Quality Tested</h3>
+      <p>Every machine undergoes 47-point quality inspection before dispatch</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛠️</div>
+      <h3>Expert Installation</h3>
+      <p>Certified engineers install and commission every machine at your site</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📞</div>
+      <h3>24/7 Support</h3>
+      <p>Dedicated technical support team available round the clock</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Brand Partners</h3>
+      <p>Authorized dealer for 20+ global machinery brands</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3>Best Price Guarantee</h3>
+      <p>We match any verified lower price — no questions asked</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>Buy-Back Option</h3>
+      <p>Trade in your old machine and upgrade to newer models</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ REVIEWS ═══════════════════════════ -->
+<section class="section section-dark" id="reviews">
+  <div class="section-header">
+    <div class="section-tag">TESTIMONIALS</div>
+    <h2>What Our <span class="accent">Clients</span> Say</h2>
+    <p>Real reviews from verified customers</p>
+  </div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviewsTrack"></div>
+  </div>
+  <div class="reviews-dots" id="reviewsDots"></div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <div class="section-tag">GET IN TOUCH</div>
+    <h2>Contact <span class="accent">Us</span></h2>
+    <p>Ready to equip your workshop? Let's talk.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-cards">
+      <a href="https://wa.me/919876543210?text=Hello%2C%20I%20am%20interested%20in%20your%20machinery" class="contact-card whatsapp" target="_blank">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="cc-text">
+          <span class="cc-label">WhatsApp Us</span>
+          <span class="cc-value">+91 98765 43210</span>
+        </div>
+      </a>
+
+      <a href="tel:+919876543210" class="contact-card phone">
+        <div class="cc-icon">📞</div>
+        <div class="cc-text">
+          <span class="cc-label">Call Us</span>
+          <span class="cc-value">+91 98765 43210</span>
+        </div>
+      </a>
+
+      <a href="mailto:info@steelcraftworkshop.com" class="contact-card email">
+        <div class="cc-icon">✉️</div>
+        <div class="cc-text">
+          <span class="cc-label">Email Us</span>
+          <span class="cc-value">info@steelcraftworkshop.com</span>
+        </div>
+      </a>
+
+      <div class="contact-card address">
+        <div class="cc-icon">📍</div>
+        <div class="cc-text">
+          <span class="cc-label">Visit Us</span>
+          <span class="cc-value">12 Industrial Estate, Kasba, Kolkata – 700042</span>
+        </div>
+      </div>
+
+      <div class="contact-hours">
+        <h4>Working Hours</h4>
+        <div class="hours-row"><span>Mon – Sat</span><span>9:00 AM – 7:00 PM</span></div>
+        <div class="hours-row"><span>Sunday</span><span>10:00 AM – 3:00 PM</span></div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <form class="contact-form" id="contactForm">
+        <h3>Send an Enquiry</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="cf-name" placeholder="Rajesh Kumar" required />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="cf-phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cf-email" placeholder="you@company.com" />
+        </div>
+        <div class="form-group">
+          <label>Machine / Product Interest</label>
+          <input type="text" id="cf-product" placeholder="e.g. CNC Lathe, Welding Machine..." />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cf-message" rows="4" placeholder="Tell us about your requirement..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Send Enquiry →</button>
+        <p class="form-note">We respond within 2 hours on business days.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MAP ═══════════════════════════ -->
+<section class="map-section">
+  <div class="map-header">
+    <h3>Find Us on the Map</h3>
+    <p>12 Industrial Estate, Kasba, Kolkata – 700042, West Bengal</p>
+  </div>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.4!2d88.3832!3d22.5197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDMxJzEwLjkiTiA4OMKwMjMnMDUuNSJF!5e0!3m2!1sen!2sin!4v1"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-icon">⚙</span>
+        <span class="logo-text">STEEL<em>CRAFT</em></span>
+      </div>
+      <p>Your trusted partner for industrial equipment and workshop machinery since 2008.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">in</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="LinkedIn">li</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#machines">All Machinery</a>
+      <a href="#gallery">Photo Gallery</a>
+      <a href="#reviews">Customer Reviews</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a href="#">CNC Machines</a>
+      <a href="#">Lathe Machines</a>
+      <a href="#">Welding Equipment</a>
+      <a href="#">Hydraulic Press</a>
+      <a href="#">Drilling Machines</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+919876543210">+91 98765 43210</a>
+      <a href="mailto:info@steelcraftworkshop.com">info@steelcraftworkshop.com</a>
+      <a href="https://wa.me/919876543210">WhatsApp Chat</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SteelCraft Workshop. All rights reserved.</span>
+    <span>Designed with ⚙ in Kolkata</span>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
