@@ -45,9 +45,13 @@
 
   hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open');
   });
   mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
   });
 
   backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));

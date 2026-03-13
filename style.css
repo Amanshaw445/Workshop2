@@ -1,29 +1,29 @@
 /* ═══════════════════════════════════════════════
    STEELCRAFT WORKSHOP — MAIN STYLESHEET
    Industrial / Luxury aesthetic
-   Palette: Deep charcoal, molten amber, steel white
+   Palette: Clean white, forest green, steel gray
 ═══════════════════════════════════════════════ */
 
 :root {
-  --bg: #0e0f11;
-  --bg2: #141619;
-  --bg3: #1a1d21;
-  --surface: #1f2228;
-  --surface2: #272b33;
-  --border: rgba(255,255,255,0.08);
-  --amber: #f59e0b;
-  --amber-light: #fbbf24;
-  --amber-dark: #d97706;
-  --steel: #94a3b8;
-  --text: #f1f5f9;
-  --text2: #94a3b8;
+  --bg: #f8fafc;
+  --bg2: #ffffff;
+  --bg3: #f1f5f9;
+  --surface: #ffffff;
+  --surface2: #f8fafc;
+  --border: rgba(0,0,0,0.1);
+  --amber: #22c55e;
+  --amber-light: #34d399;
+  --amber-dark: #16a34a;
+  --steel: #64748b;
+  --text: #0f172a;
+  --text2: #475569;
   --text3: #64748b;
   --green: #22c55e;
   --red: #ef4444;
   --radius: 12px;
   --radius-lg: 20px;
-  --shadow: 0 8px 32px rgba(0,0,0,0.4);
-  --shadow-amber: 0 8px 32px rgba(245,158,11,0.2);
+  --shadow: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-amber: 0 8px 32px rgba(34,197,94,0.2);
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'DM Mono', monospace;
@@ -88,14 +88,14 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 /* ══════════════════ NAVBAR ══════════════════ */
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(14,15,17,0.9); backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.9); backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   transition: var(--transition);
 }
-#navbar.scrolled { background: rgba(14,15,17,0.98); }
+#navbar.scrolled { background: rgba(255,255,255,0.98); }
 .nav-inner {
   max-width: 1280px; margin: 0 auto;
-  display: flex; align-items: center; gap: 40px;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 0 24px; height: 70px;
 }
 .logo {
@@ -123,16 +123,23 @@ h3 { font-size: 1.25rem; font-weight: 600; }
   transition: var(--transition);
 }
 .nav-cta:hover { background: var(--amber-light); }
-.hamburger { display: none; flex-direction: column; gap: 5px; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
 .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 .mobile-menu {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
   display: none; flex-direction: column; gap: 0;
-  border-top: 1px solid var(--border);
 }
 .mobile-menu a {
   padding: 16px 24px; border-bottom: 1px solid var(--border);
   font-weight: 500; color: var(--text2);
+  transition: var(--transition);
 }
+.mobile-menu a:hover { background: var(--surface); color: var(--text); }
 .mobile-menu.open { display: flex; }
 
 /* ══════════════════ HERO ══════════════════ */
@@ -157,13 +164,13 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 .hero-glow {
   position: absolute; top: 20%; left: 60%;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-content { flex: 1; max-width: 680px; }
 .hero-badge {
   display: inline-block;
-  background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3);
+  background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
   color: var(--amber); padding: 8px 18px; border-radius: 100px;
   font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
   margin-bottom: 28px;
@@ -235,7 +242,7 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 /* ══════════════════ SECTIONS ══════════════════ */
 .section { padding: 100px 24px; max-width: 1280px; margin: 0 auto; }
 .section-dark {
-  background: var(--bg2); max-width: 100%; padding: 100px 0;
+  background: var(--bg3); max-width: 100%; padding: 100px 0;
 }
 .section-dark > * { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
 .section-header { text-align: center; margin-bottom: 64px; }
@@ -610,6 +617,26 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 .back-top.visible { opacity: 1; pointer-events: all; }
 .back-top:hover { transform: translateY(-4px); }
 
+/* ══════════════════ WHATSAPP FLOAT ══════════════════ */
+.whatsapp-float {
+  position: fixed; bottom: 90px; right: 28px; z-index: 999;
+  width: 56px; height: 56px; background: #25d366; color: #fff;
+  border-radius: 50%; font-size: 1.5rem; display: flex;
+  align-items: center; justify-content: center;
+  border: none; cursor: pointer; transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+.whatsapp-float:hover { transform: scale(1.1); background: #20ba5a; }
+
+/* ══════════════════ DEMO NOTICE ══════════════════ */
+.demo-notice {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+  background: #f59e0b; color: #000;
+  text-align: center; padding: 10px;
+  font-size: 0.875rem; font-weight: 600;
+  border-top: 1px solid #d97706;
+}
+
 /* ══════════════════ TOAST ══════════════════ */
 .toast {
   position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
@@ -654,6 +681,9 @@ h3 { font-size: 1.25rem; font-weight: 600; }
   .review-card { flex: 0 0 calc(50% - 12px); }
 }
 @media (max-width: 768px) {
+  .nav-inner { padding: 0 16px; height: 60px; }
+  .logo { font-size: 1.25rem; }
+  .logo-icon { font-size: 1.4rem; }
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
   .hero-title { font-size: clamp(2.5rem, 10vw, 4.5rem); }
